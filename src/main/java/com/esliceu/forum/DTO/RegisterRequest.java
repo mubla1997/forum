@@ -1,32 +1,18 @@
-package com.esliceu.forum.models;
+package com.esliceu.forum.DTO;
 
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
-@Table(name = "Cuenta")
-@Entity
-public class Cuenta {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+@Data
+public class RegisterRequest {
+    @NotNull
     String email;
+    @NotNull
     String username;
+    @NotNull
     String passwd;
+    @NotNull
     String rol;
-
-    public enum ROL{ User,Moderator,admin}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

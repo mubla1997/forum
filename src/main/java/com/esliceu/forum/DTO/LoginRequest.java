@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 @Data
-public class AuthRequest {
+public class LoginRequest {
     @NotNull
     private String email;
 

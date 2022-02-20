@@ -1,5 +1,6 @@
 package com.esliceu.forum.services;
 
+import com.esliceu.forum.DTO.RegisterRequest;
 import com.esliceu.forum.models.Cuenta;
 import com.esliceu.forum.repositories.CuentaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ public class MainServiceImpl implements MainService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails findByUsername(String username) {
+    public UserDetails findByUsername(String email) {
         try {
-            Cuenta cuenta = cuentaRepo.findByUsername(username);
-            return new User(cuenta.getUsername(), passwordEncoder.encode(cuenta.getPasswd()), new ArrayList <>());
+            Cuenta cuenta = cuentaRepo.findByEmail(email);
+            return new User(cuenta.getEmail(), passwordEncoder.encode(cuenta.getPasswd()), new ArrayList <>());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -30,13 +31,17 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public Cuenta createUser(String email, String username, String passwd ,String rol) {
+    public Cuenta getUser(String email) {
+        return cuentaRepo.findByEmail(email);
+    }
+
+    @Override
+    public void createUser(RegisterRequest request) {
         Cuenta cuenta = new Cuenta();
-        cuenta.setEmail(email);
-        cuenta.setUsername(username);
-        cuenta.setPasswd(passwd);
-        cuenta.setRol(rol);
+        cuenta.setEmail(request.getEmail());
+        cuenta.setUsername(request.getUsername());
+        cuenta.setPasswd(passwordEncoder.encode(request.getPasswd()));
+        cuenta.setRol(request.getRol());
         cuentaRepo.save(cuenta);
-        return cuenta;
     }
 }
