@@ -35,14 +35,14 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         try {
-            auth.userDetailsService(username -> service.findByUsername(username));
+            auth.userDetailsService(username -> service.loadByUsername(username));
         }catch (UsernameNotFoundException usernameNotFoundException){
             System.out.println("Username not found, try again...");
         }
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();
+    public static PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -70,6 +70,7 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET,"/").permitAll()
                 .antMatchers(HttpMethod.GET,"/error").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/register").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(

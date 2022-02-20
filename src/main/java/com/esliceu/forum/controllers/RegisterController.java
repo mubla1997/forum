@@ -17,6 +17,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ResponseEntity <String>  getRegister(@RequestBody RegisterRequest request){
+
         service.createUser(request);
 
         return ResponseEntity.ok().body("ok");

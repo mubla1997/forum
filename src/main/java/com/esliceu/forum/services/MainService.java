@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface MainService {
     UserDetails findByUsername(String email);
+    UserDetails loadByUsername(String username);
     Cuenta getUser(String email);
     void createUser(RegisterRequest request);
 }

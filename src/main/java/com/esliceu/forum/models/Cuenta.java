@@ -1,11 +1,6 @@
 package com.esliceu.forum.models;
 
-import javax.persistence.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "Cuenta")
 @Entity
@@ -13,12 +8,16 @@ public class Cuenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Column(name = "email")
     String email;
+    @Column(name = "username")
     String username;
+    @Column(name = "passwd")
     String passwd;
+    @Column(name = "rol")
     String rol;
 
-    public enum ROL{ User,Moderator,admin}
+    // public enum ROL{ User,Moderator,admin}
 
     public int getId() {
         return id;

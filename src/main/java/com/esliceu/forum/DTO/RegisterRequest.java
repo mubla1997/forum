@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 public class RegisterRequest {
     @NotNull
-    String email;
+    private String email;
     @NotNull
-    String username;
+    private String username;
     @NotNull
-    String passwd;
+    private String passwd;
     @NotNull
-    String rol;
+    private String rol;
 
     public String getEmail() {
         return email;
