@@ -13,9 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 public class LoginController {
     @Autowired
@@ -35,8 +32,8 @@ public class LoginController {
                     )
                     .body("OK");
         }catch (BadCredentialsException ex){
-            return new ResponseEntity<>("Unauth",HttpStatus.UNAUTHORIZED);
-            //throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>("Usuario no autorizado",HttpStatus.UNAUTHORIZED);
+
         }
     }
 
@@ -49,6 +46,4 @@ public class LoginController {
                 );
         return (User) autenticate.getPrincipal();
     }
-
-
 }

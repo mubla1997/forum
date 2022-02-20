@@ -15,8 +15,8 @@ public class Cuenta {
     int id;
     String email;
     String username;
-    String password;
-    byte[] photo;
+    String passwd;
+    String rol;
 
     public int getId() {
         return id;
@@ -42,19 +42,19 @@ public class Cuenta {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswd() {
+        return passwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getRol() {
+        return rol;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

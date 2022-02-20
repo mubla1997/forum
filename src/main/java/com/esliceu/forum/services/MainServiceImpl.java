@@ -22,10 +22,21 @@ public class MainServiceImpl implements MainService {
     public UserDetails findByUsername(String username) {
         try {
             Cuenta cuenta = cuentaRepo.findByUsername(username);
-            return new User(cuenta.getUsername(), passwordEncoder.encode(cuenta.getPassword()), new ArrayList <>());
+            return new User(cuenta.getUsername(), passwordEncoder.encode(cuenta.getPasswd()), new ArrayList <>());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public Cuenta createUser(String email, String username, String passwd ,String rol) {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setEmail(email);
+        cuenta.setUsername(username);
+        cuenta.setPasswd(passwd);
+        cuenta.setRol(rol);
+        cuentaRepo.save(cuenta);
+        return cuenta;
     }
 }
