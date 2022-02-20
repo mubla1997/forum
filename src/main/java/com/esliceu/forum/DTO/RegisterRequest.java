@@ -8,11 +8,11 @@ public class RegisterRequest {
     @NotNull
     private String email;
     @NotNull
-    private String username;
+    private String name;
     @NotNull
-    private String passwd;
+    private String password;
     @NotNull
-    private String rol;
+    private String role;
 
     public String getEmail() {
         return email;
@@ -22,27 +22,27 @@ public class RegisterRequest {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRol() {
-        return rol;
+    public String getRole() {
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

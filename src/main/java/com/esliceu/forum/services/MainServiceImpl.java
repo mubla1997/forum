@@ -21,7 +21,7 @@ public class MainServiceImpl implements MainService {
     public UserDetails findByUsername(String email) {
         try {
             Cuenta cuenta = cuentaRepo.findByEmail(email);
-            return new User(cuenta.getEmail(), MyConfiguration.passwordEncoder().encode(cuenta.getPasswd()), new ArrayList <>());
+            return new User(cuenta.getEmail(), MyConfiguration.passwordEncoder().encode(cuenta.getPassword()), new ArrayList <>());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -31,7 +31,7 @@ public class MainServiceImpl implements MainService {
     @Override
     public UserDetails loadByUsername(String username)throws UsernameNotFoundException {
         Cuenta cuenta = cuentaRepo.findByEmail(username);
-        return new User(cuenta.getEmail(), cuenta.getPasswd(), new ArrayList <>());
+        return new User(cuenta.getEmail(), cuenta.getPassword(), new ArrayList <>());
     }
 
     @Override
@@ -42,10 +42,10 @@ public class MainServiceImpl implements MainService {
     @Override
     public void createUser(RegisterRequest request) {
            Cuenta cuenta = new Cuenta();
-           cuenta.setUsername(request.getUsername());
+           cuenta.setName(request.getName());
            cuenta.setEmail(request.getEmail());
-           cuenta.setPasswd(MyConfiguration.passwordEncoder().encode(request.getPasswd()));
-           cuenta.setRol(request.getRol());
+           cuenta.setPassword(MyConfiguration.passwordEncoder().encode(request.getPassword()));
+           cuenta.setRole(request.getRole());
            cuentaRepo.save(cuenta);
 
        }

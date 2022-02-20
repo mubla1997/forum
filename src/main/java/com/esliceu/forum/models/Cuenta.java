@@ -10,14 +10,16 @@ public class Cuenta {
     int id;
     @Column(name = "email")
     String email;
-    @Column(name = "username")
-    String username;
-    @Column(name = "passwd")
-    String passwd;
-    @Column(name = "rol")
-    String rol;
+    @Column(name = "name")
+    String name;
+    @Column(name = "password")
+    String password;
+    @Column(name = "role")
+    String role;
+
 
     // public enum ROL{ User,Moderator,admin}
+
 
     public int getId() {
         return id;
@@ -35,27 +37,27 @@ public class Cuenta {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRol() {
-        return rol;
+    public String getRole() {
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
