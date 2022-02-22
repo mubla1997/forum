@@ -10,4 +10,5 @@ public interface MainService {
     Cuenta getUser(String email);
     void createUser(RegisterRequest request);
     void updateUser(Cuenta cuenta);
+    void updatePassword(String email,String currentPassword,String newPassword);
 }

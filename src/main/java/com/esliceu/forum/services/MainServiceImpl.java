@@ -55,4 +55,15 @@ public class MainServiceImpl implements MainService {
         cuentaRepo.save(cuenta);
     }
 
+    @Override
+    public void updatePassword(String email, String currentPassword, String newPassword) {
+        Cuenta cuenta = cuentaRepo.findByEmail(email);
+        newPassword = MyConfiguration.passwordEncoder().encode(newPassword);
+
+        if(MyConfiguration.passwordEncoder().matches(currentPassword, cuenta.getPassword())){
+            cuenta.setPassword(newPassword);
+            cuentaRepo.save(cuenta);
+        }
+    }
+
 }

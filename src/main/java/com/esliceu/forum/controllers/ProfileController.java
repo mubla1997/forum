@@ -62,11 +62,23 @@ public class ProfileController {
     }
 
     @PutMapping("/profile/password") // Actualiza la contraseña
-    public ResponseEntity<String> updateUserPassword(@RequestHeader("Authorization") String token, @RequestBody String data){
+    public ResponseEntity<String> updateUserPassword(@RequestHeader("Authorization") String token, @RequestBody String data) throws JsonProcessingException {
         token = token.replace("Bearer ", "");
 
         String user = jwtTokenUtil.getUsername(token);
-        return null;
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String,String> passwords = mapper.readValue(data,Map.class);
+        String actualPassword = passwords.get("currentPassword");
+        String newPassword = passwords.get("newPassword");
+
+        service.updatePassword(user,actualPassword,newPassword);
+
+        Cuenta cuenta = service.getUser(user);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.appendField("user", cuenta);
+        return ResponseEntity.ok().body(jsonObject.toJSONString());
 
     }
 
