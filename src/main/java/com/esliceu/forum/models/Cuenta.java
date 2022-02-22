@@ -1,6 +1,7 @@
 package com.esliceu.forum.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Table(name = "Cuenta")
 @Entity
@@ -16,10 +17,14 @@ public class Cuenta {
     String password;
     @Column(name = "role")
     String role;
+    @Column(name = "avatar")
+    String avatar;
 
+    //@ManyToOne
+  //  @JoinColumn(name ="id", insertable = false, updatable = false, nullable = false)
+   // private Categoria categoria;
 
-    // public enum ROL{ User,Moderator,admin}
-
+    public enum ROLE{ User,Moderator,admin}
 
     public int getId() {
         return id;
@@ -59,5 +64,13 @@ public class Cuenta {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

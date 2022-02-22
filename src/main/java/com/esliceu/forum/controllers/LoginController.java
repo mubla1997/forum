@@ -31,7 +31,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity <String> getLogin(@RequestBody LoginRequest request){
-        // Falta el try para las excepciones
 
             User user = authenticate(request);
             Cuenta cuenta = service.getUser(request.getEmail());

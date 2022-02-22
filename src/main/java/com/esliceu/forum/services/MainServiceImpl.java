@@ -50,4 +50,9 @@ public class MainServiceImpl implements MainService {
 
        }
 
+    @Override
+    public void updateUser(Cuenta cuenta) {
+        cuentaRepo.save(cuenta);
+    }
+
 }

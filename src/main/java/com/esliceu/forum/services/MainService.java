@@ -9,4 +9,5 @@ public interface MainService {
     UserDetails loadByUsername(String username);
     Cuenta getUser(String email);
     void createUser(RegisterRequest request);
+    void updateUser(Cuenta cuenta);
 }

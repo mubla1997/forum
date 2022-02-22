@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CategoriesController {
-
+/*
     @GetMapping("/categories") //Enseñar todas las categorias
-    public void showAllCategories(){}
+    public void showAllCategories(){
+
+    }
 
     @PostMapping("/categories") //Crear categoria
     public void createCategorie(){}
@@ -47,6 +49,6 @@ public class CategoriesController {
     @PutMapping("/topics/${topicId}/replies/${replyId}") // Actualizar reply
     public void updateReply(){}
 
-
+*/
 
 }
