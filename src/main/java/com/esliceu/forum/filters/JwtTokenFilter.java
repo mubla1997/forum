@@ -1,6 +1,6 @@
 package com.esliceu.forum.filters;
 
-import com.esliceu.forum.services.MainServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +25,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    MainServiceImpl service;
+    UserServiceImpl service;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

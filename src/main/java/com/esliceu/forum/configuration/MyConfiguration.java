@@ -1,7 +1,7 @@
 package com.esliceu.forum.configuration;
 
 import com.esliceu.forum.filters.JwtTokenFilter;
-import com.esliceu.forum.services.MainServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class MyConfiguration extends WebSecurityConfigurerAdapter{
     @Autowired
-    MainServiceImpl service;
+    UserServiceImpl service;
 
     @Autowired
     JwtTokenFilter jwtTokenFilter;

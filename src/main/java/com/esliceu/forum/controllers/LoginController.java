@@ -2,12 +2,10 @@ package com.esliceu.forum.controllers;
 
 import com.esliceu.forum.DTO.LoginRequest;
 import com.esliceu.forum.models.Cuenta;
-import com.esliceu.forum.services.MainServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 
@@ -27,7 +25,7 @@ public class LoginController {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    MainServiceImpl service;
+    UserServiceImpl service;
 
     @PostMapping("/login")
     public ResponseEntity <String> getLogin(@RequestBody LoginRequest request){

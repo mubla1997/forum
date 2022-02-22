@@ -2,7 +2,7 @@ package com.esliceu.forum.controllers;
 
 
 import com.esliceu.forum.DTO.RegisterRequest;
-import com.esliceu.forum.services.MainServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
 
     @Autowired
-    MainServiceImpl service;
+    UserServiceImpl service;
 
     @PostMapping("/register")
     public ResponseEntity <String>  getRegister(@RequestBody RegisterRequest request){

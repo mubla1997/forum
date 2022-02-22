@@ -4,7 +4,7 @@ import com.esliceu.forum.DTO.RegisterRequest;
 import com.esliceu.forum.models.Cuenta;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public interface MainService {
+public interface UserService {
     UserDetails findByUsername(String email);
     UserDetails loadByUsername(String username);
     Cuenta getUser(String email);

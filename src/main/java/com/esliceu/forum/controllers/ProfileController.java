@@ -1,7 +1,7 @@
 package com.esliceu.forum.controllers;
 
 import com.esliceu.forum.models.Cuenta;
-import com.esliceu.forum.services.MainServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +20,7 @@ public class ProfileController {
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    MainServiceImpl service;
+    UserServiceImpl service;
 
     @GetMapping("/getprofile") //Obtener los datos de usuario
     public Map<String,String> getProfileData(@RequestHeader("Authorization") String token){

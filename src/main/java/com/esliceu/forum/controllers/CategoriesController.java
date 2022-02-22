@@ -1,15 +1,25 @@
 package com.esliceu.forum.controllers;
 
+import com.esliceu.forum.models.Categoria;
+import com.esliceu.forum.services.CategoryServiceImpl;
+import com.esliceu.forum.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CategoriesController {
-/*
+
+    @Autowired
+    CategoryServiceImpl service;
+
+
     @GetMapping("/categories") //Enseñar todas las categorias
-    public void showAllCategories(){
-
+    public List <Categoria> showAllCategories(){
+        return service.findAll();
     }
-
+/*
     @PostMapping("/categories") //Crear categoria
     public void createCategorie(){}
 
@@ -48,7 +58,5 @@ public class CategoriesController {
 
     @PutMapping("/topics/${topicId}/replies/${replyId}") // Actualizar reply
     public void updateReply(){}
-
 */
-
 }

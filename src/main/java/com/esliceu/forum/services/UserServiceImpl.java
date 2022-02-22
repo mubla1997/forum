@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class MainServiceImpl implements MainService {
+public class UserServiceImpl implements UserService {
     @Autowired
     CuentaRepo cuentaRepo;
 
