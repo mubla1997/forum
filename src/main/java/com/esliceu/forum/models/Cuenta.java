@@ -20,10 +20,6 @@ public class Cuenta {
     @Column(name = "avatar")
     String avatar;
 
-    @ManyToOne
-    @JoinColumn(name ="id", insertable = false, updatable = false, nullable = false)
-    private Categoria categoria;
-
     public enum ROLE{ User,Moderator,admin}
 
     public int getId() {
@@ -74,11 +70,4 @@ public class Cuenta {
         this.avatar = avatar;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }

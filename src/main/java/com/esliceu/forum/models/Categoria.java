@@ -1,7 +1,8 @@
 package com.esliceu.forum.models;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Table(name = "Categoria")
 @Entity
@@ -15,11 +16,8 @@ public class Categoria {
     String title;
     @Column(name = "description")
     String description;
-    @Column(name = "column")
+    @Column(name = "color")
     String color;
-
-    @OneToMany (mappedBy = "categoria")
-    Set<Cuenta> moderators;
 
     public int getId() {
         return id;
@@ -61,11 +59,4 @@ public class Categoria {
         this.color = color;
     }
 
-    public Set <Cuenta> getModerators() {
-        return moderators;
-    }
-
-    public void setModerators(Set <Cuenta> moderators) {
-        this.moderators = moderators;
-    }
 }

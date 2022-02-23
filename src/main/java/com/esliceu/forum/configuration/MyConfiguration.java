@@ -71,6 +71,8 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.GET,"/error").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/register").permitAll()
+                .antMatchers(HttpMethod.GET,"/categories/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/getprofile").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(

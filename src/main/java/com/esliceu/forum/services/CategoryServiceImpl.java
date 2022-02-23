@@ -16,4 +16,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List <Categoria> findAll() {
         return categoriaRepo.findAll();
     }
+
+    @Override
+    public Categoria createCategory(Categoria categoria) {
+        return categoriaRepo.save(categoria);
+    }
 }
