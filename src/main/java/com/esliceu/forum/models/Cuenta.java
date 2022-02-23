@@ -1,7 +1,7 @@
 package com.esliceu.forum.models;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 
 @Table(name = "Cuenta")
 @Entity
@@ -70,4 +70,26 @@ public class Cuenta {
         this.avatar = avatar;
     }
 
+    public Map <String,Object> ObtainJson() {
+
+        Map <String, Object> user = new HashMap <>();
+        user.put("avatar", getAvatar());
+        user.put("email", getEmail());
+        user.put("id", getId());
+        user.put("name", getName());
+
+        Map <String, Object> permissions = new HashMap <>();
+        List <String> root = new ArrayList <>();
+        root.add("categories:write");
+        root.add("categories:delete");
+        root.add("own_topics:write");
+        root.add("own_topics:delete");
+        root.add("own_replies:write");
+        root.add("own_replies:delete");
+        permissions.put("root", root);
+
+        user.put("permissions", permissions);
+
+        return user;
+    }
 }

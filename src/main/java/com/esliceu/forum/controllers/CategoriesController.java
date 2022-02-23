@@ -21,7 +21,7 @@ public class CategoriesController {
         return service.findAll();
     }
 
-    @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
+
     @PostMapping("/categories")
     public Map <String,Object> createCategory(@RequestBody Map<String,Object> data){
         String title = (String) data.get("title");
