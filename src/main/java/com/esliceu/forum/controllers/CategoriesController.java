@@ -38,4 +38,17 @@ public class CategoriesController {
         service.createCategory(categoria);
         return data;
     }
+
+    @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
+   @PutMapping("/categories/{title}")
+    public Map <String,Object> updateCategory(@PathVariable String title, @RequestBody Map<String,Object> newData){
+
+        Categoria categoria = service.findByTitle(title);
+        categoria.setTitle((String) newData.get("title"));
+        categoria.setDescription((String) newData.get("description"));
+        categoria.setSlug((String) newData.get("title"));
+
+        service.createCategory(categoria);
+        return newData;
+    }
 }
