@@ -73,10 +73,10 @@ public class Cuenta {
     public Map <String,Object> ObtainJson() {
 
         Map <String, Object> user = new HashMap <>();
-        user.put("avatar", getAvatar());
-        user.put("email", getEmail());
         user.put("id", getId());
+        user.put("email", getEmail());
         user.put("name", getName());
+        user.put("avatar", getAvatar());
 
         Map <String, Object> permissions = new HashMap <>();
         List <String> root = new ArrayList <>();

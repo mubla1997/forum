@@ -21,7 +21,7 @@ public class CategoriesController {
         return service.findAll();
     }
 
-
+    @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
     @PostMapping("/categories")
     public Map <String,Object> createCategory(@RequestBody Map<String,Object> data){
         String title = (String) data.get("title");
@@ -29,7 +29,7 @@ public class CategoriesController {
         if(title.contains("/")){
             data.put("title", title.replace("/",""));
         }
-
+        data.put("slug",title);
         Categoria categoria = new Categoria();
         categoria.setTitle((String) data.get("title"));
         categoria.setDescription((String) data.get("description"));

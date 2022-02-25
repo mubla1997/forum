@@ -35,7 +35,7 @@ public class LoginController {
             String tokenUtils = jwtTokenUtil.generateAccessToken(user);
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.appendField("user", cuenta);
+            jsonObject.appendField("user", cuenta.ObtainJson());
             jsonObject.appendField("token",tokenUtils);
 
             return ResponseEntity.ok()

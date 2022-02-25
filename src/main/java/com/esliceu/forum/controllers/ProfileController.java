@@ -30,16 +30,10 @@ public class ProfileController {
 
         String user = jwtTokenUtil.getUsername(token);
         Cuenta cuenta = service.getUser(user);
-/*
-        Map <String,String> json = new HashMap<>(); //avatar,email,name,id
-        json.put("avatar", cuenta.getAvatar());
-        json.put("email", cuenta.getEmail());
-        json.put("name",cuenta.getName());
-        */
 
         return cuenta.ObtainJson();
     }
-
+    @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @PutMapping("/profile")
     public ResponseEntity<String> updateUserProfile(@RequestHeader("Authorization") String token, @RequestBody /*Map*/String data) throws JsonProcessingException {
 
@@ -59,12 +53,12 @@ public class ProfileController {
         service.updateUser(cuenta);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.appendField("user", cuenta);
+        jsonObject.appendField("user", cuenta.ObtainJson());
         jsonObject.appendField("token", token);
 
         return ResponseEntity.ok().body(jsonObject.toJSONString());
     }
-
+    @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @PutMapping("/profile/password")
     public Map<String, Object> updateUserPassword(@RequestHeader("Authorization") String token, @RequestBody String data) throws JsonProcessingException {
         token = token.replace("Bearer ", "");
