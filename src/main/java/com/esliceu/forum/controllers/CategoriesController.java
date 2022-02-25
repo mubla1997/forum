@@ -42,7 +42,6 @@ public class CategoriesController {
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
    @PutMapping("/categories/{title}")
     public Map <String,Object> updateCategory(@PathVariable String title, @RequestBody Map<String,Object> newData){
-
         Categoria categoria = service.findByTitle(title);
         categoria.setTitle((String) newData.get("title"));
         categoria.setDescription((String) newData.get("description"));
@@ -50,5 +49,12 @@ public class CategoriesController {
 
         service.createCategory(categoria);
         return newData;
+    }
+
+    @PreAuthorize("hasAnyRole('Moderator','Admin')")
+    @DeleteMapping("/categories/{title}")
+    public String deleteCategory(@PathVariable String title){
+        service.deleteCategory(title);
+        return "ok";
     }
 }

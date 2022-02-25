@@ -8,4 +8,5 @@ public interface CategoryService {
     public List<Categoria> findAll();
     public Categoria createCategory(Categoria categoria);
     public Categoria findByTitle(String title);
+    void deleteCategory(String title);
 }
