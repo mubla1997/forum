@@ -3,6 +3,7 @@ package com.esliceu.forum.models;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Table(name = "Categoria")
 @Entity
@@ -18,6 +19,7 @@ public class Categoria {
     String description;
     @Column(name = "color")
     String color;
+
 
     public int getId() {
         return id;

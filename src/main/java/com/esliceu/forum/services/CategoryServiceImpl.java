@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Categoria createCategory(Categoria categoria) {
-        return categoriaRepo.save(categoria);
+    public void createCategory(Categoria categoria) {
+        categoriaRepo.save(categoria);
     }
 
     @Override

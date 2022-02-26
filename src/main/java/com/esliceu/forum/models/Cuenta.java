@@ -1,5 +1,7 @@
 package com.esliceu.forum.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -19,6 +21,10 @@ public class Cuenta {
     String role;
     @Column(name = "avatar")
     String avatar;
+
+    @JsonIgnore
+    @OneToMany
+    Set<Topic> topics;
 
     public enum ROLE{ User,Moderator,admin}
 

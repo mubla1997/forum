@@ -5,8 +5,8 @@ import com.esliceu.forum.models.Categoria;
 import java.util.List;
 
 public interface CategoryService {
-    public List<Categoria> findAll();
-    public Categoria createCategory(Categoria categoria);
-    public Categoria findByTitle(String title);
+    List<Categoria> findAll();
+    void createCategory(Categoria categoria);
+    Categoria findByTitle(String title);
     void deleteCategory(String title);
 }
