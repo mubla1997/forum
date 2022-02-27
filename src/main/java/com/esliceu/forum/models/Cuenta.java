@@ -26,8 +26,6 @@ public class Cuenta {
     @OneToMany
     Set<Topic> topics;
 
-    public enum ROLE{ User,Moderator,admin}
-
     public int getId() {
         return id;
     }
@@ -74,6 +72,14 @@ public class Cuenta {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Set <Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(Set <Topic> topics) {
+        this.topics = topics;
     }
 
     public Map <String,Object> ObtainJson() {

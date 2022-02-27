@@ -20,6 +20,9 @@ public class Categoria {
     @Column(name = "color")
     String color;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria")
+    Set<Topic> topics;
 
     public int getId() {
         return id;
@@ -61,4 +64,11 @@ public class Categoria {
         this.color = color;
     }
 
+    public Set <Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(Set <Topic> topics) {
+        this.topics = topics;
+    }
 }

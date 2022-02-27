@@ -1,6 +1,5 @@
 package com.esliceu.forum.controllers;
 
-import com.esliceu.forum.DTO.PermisionsRequest;
 import com.esliceu.forum.models.Cuenta;
 import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
