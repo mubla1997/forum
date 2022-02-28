@@ -20,11 +20,15 @@ public class Cuenta {
     @Column(name = "role")
     String role;
     @Column(name = "avatar")
-    String avatar;
+    byte[] avatar;
 
     @JsonIgnore
     @OneToMany
     Set<Topic> topics;
+
+    @JsonIgnore
+    @OneToMany
+    Set<Reply> replies;
 
     public int getId() {
         return id;
@@ -66,11 +70,11 @@ public class Cuenta {
         this.role = role;
     }
 
-    public String getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
 
@@ -80,6 +84,14 @@ public class Cuenta {
 
     public void setTopics(Set <Topic> topics) {
         this.topics = topics;
+    }
+
+    public Set <Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set <Reply> replies) {
+        this.replies = replies;
     }
 
     public Map <String,Object> ObtainJson() {

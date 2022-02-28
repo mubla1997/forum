@@ -1,7 +1,10 @@
 package com.esliceu.forum.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Set;
 
 @Table(name = "Topic")
 @Entity
@@ -29,9 +32,11 @@ public class Topic {
     Categoria categoria;
 
     @Column(name = "idCategoria",insertable = false,updatable = false)
-    int idCategoria;
+    Integer idCategoria;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "topic")
+    Set <Reply> replies;
 
     public int getId() {
         return id;
@@ -81,19 +86,27 @@ public class Topic {
         this.cuenta = cuenta;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
     public Categoria getCategoria() {
         return categoria;
     }
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public Set <Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set <Reply> replies) {
+        this.replies = replies;
     }
 }

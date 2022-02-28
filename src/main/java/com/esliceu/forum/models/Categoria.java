@@ -17,8 +17,6 @@ public class Categoria {
     String title;
     @Column(name = "description")
     String description;
-    @Column(name = "color")
-    String color;
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")
@@ -54,14 +52,6 @@ public class Categoria {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Set <Topic> getTopics() {

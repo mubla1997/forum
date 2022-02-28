@@ -1,6 +1,7 @@
 package com.esliceu.forum.controllers;
 
 import com.esliceu.forum.DTO.LoginRequest;
+import com.esliceu.forum.DTO.RegisterRequest;
 import com.esliceu.forum.models.Cuenta;
 import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
@@ -50,5 +51,13 @@ public class LoginController {
                         )
                 );
         return (User) autenticate.getPrincipal();
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity <String>  getRegister(@RequestBody RegisterRequest request){
+
+        service.createUser(request);
+
+        return ResponseEntity.ok().body("ok");
     }
 }
