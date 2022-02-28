@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface TopicRepo extends JpaRepository <Topic, Integer> {
-    List <Topic> findAllByIdCategoria(int idCategoria);
+
+    List <Topic> findAllByCategoriaId(int id);
 }

@@ -19,13 +19,16 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     String jwtSecret;
 
+    @Value("${jwt.tokenExpiration}")
+    int jwtTokenExpiration;
+
     Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
                 .setSubject(format("%s", user.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 60 * 100000))
+                .setExpiration(new Date(System.currentTimeMillis() + 60 * jwtTokenExpiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

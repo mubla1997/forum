@@ -3,6 +3,7 @@ package com.esliceu.forum.configuration;
 import com.esliceu.forum.filters.JwtTokenFilter;
 import com.esliceu.forum.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,9 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
 
     @Autowired
     JwtTokenFilter jwtTokenFilter;
+
+    @Value("${url}")
+    String url;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -87,7 +91,7 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
                 new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:8080/");
+        config.addAllowedOrigin(url);
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

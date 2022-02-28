@@ -24,9 +24,9 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
-    public List <Topic> getAllByIdCategoria(int idCategoria) {
+    public List <Topic> getAllByIdCategoria(int id) {
 
-        return topicRepo.findAllByIdCategoria(idCategoria);
+        return topicRepo.findAllByCategoriaId(id);
     }
 
     @Override

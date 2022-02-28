@@ -96,7 +96,7 @@ public class CategoriesController {
 
         Categoria categoria = categoryService.findByTitle(title);
 
-        return topicService.getAllByIdCategoria(categoria.getId());
+        return  topicService.getAllByIdCategoria(categoria.getId());
     }
 
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
@@ -104,13 +104,13 @@ public class CategoriesController {
     public Map<String,Object> CreateTopic(@RequestBody Map<String,Object> t, @RequestHeader("Authorization") String token)  {
         String user = jwtTokenUtil.getUsername(token.replace("Bearer ", ""));
         Cuenta cuenta = userService.getUser(user);
-        Categoria categoria = categoryService.findByTitle((String) t.get("title"));
 
         Topic topic = new Topic();
         topic.setTitle((String) t.get("title"));
         topic.setContent((String) t.get("content"));
         topic.setCreatedAt(Date.from(Instant.now()));
         topic.setCuenta(cuenta);
+        Categoria categoria = categoryService.findByTitle(topic.getTitle());
         topic.setCategoria(categoria);
         topicService.CreateTopic(topic);
 

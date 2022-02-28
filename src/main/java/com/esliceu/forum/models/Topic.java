@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Topic {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     int id;
 
     @Column(name = "title")
@@ -30,9 +30,6 @@ public class Topic {
 
     @ManyToOne
     Categoria categoria;
-
-    @Column(name = "idCategoria",insertable = false,updatable = false)
-    Integer idCategoria;
 
     @JsonIgnore
     @OneToMany(mappedBy = "topic")
@@ -92,14 +89,6 @@ public class Topic {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public Set <Reply> getReplies() {
