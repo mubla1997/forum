@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface TopicService {
     void CreateTopic(Topic topic);
-    List <Topic> findAll();
-    List<Topic> getAllByIdCategoria(int idCategoria);
+
+    List <Topic> getAllByIdCategoria(int idCategoria);
+
     Topic getTopicById(int idtopic);
 }

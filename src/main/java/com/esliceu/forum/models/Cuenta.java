@@ -24,11 +24,11 @@ public class Cuenta {
 
     @JsonIgnore
     @OneToMany
-    Set<Topic> topics;
+    Set <Topic> topics;
 
     @JsonIgnore
     @OneToMany
-    Set<Reply> replies;
+    Set <Reply> replies;
 
     public int getId() {
         return id;
@@ -94,7 +94,7 @@ public class Cuenta {
         this.replies = replies;
     }
 
-    public Map <String,Object> ObtainJson() {
+    public Map <String, Object> ObtainJson() {
 
         Map <String, Object> user = new HashMap <>();
         user.put("id", getId());

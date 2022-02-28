@@ -20,7 +20,7 @@ public class Categoria {
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")
-    Set<Topic> topics;
+    Set <Topic> topics;
 
     public int getId() {
         return id;

@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class TopicServiceImpl implements TopicService{
+public class TopicServiceImpl implements TopicService {
 
     @Autowired
     TopicRepo topicRepo;
@@ -15,12 +16,6 @@ public class TopicServiceImpl implements TopicService{
     @Override
     public void CreateTopic(Topic topic) {
         topicRepo.save(topic);
-    }
-
-    @Override
-    public List <Topic> findAll() {
-        List<Topic> topics = topicRepo.findAll();
-        return topics;
     }
 
     @Override

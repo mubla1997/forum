@@ -41,8 +41,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        setUserInSecurityContext(token,request);
-        filterChain.doFilter(request,response);
+        setUserInSecurityContext(token, request);
+        filterChain.doFilter(request, response);
 
     }
 
@@ -66,8 +66,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private boolean isEmpty(String header) {
 
-        if (header == null)return true;
-        header=header.replace("Bearer ","");
+        if (header == null) return true;
+        header = header.replace("Bearer ", "");
 
 
         return header.equals("");

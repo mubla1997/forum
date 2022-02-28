@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -40,19 +43,19 @@ public class CategoriesController {
 
 
     @GetMapping("/categories")
-    public List <Categoria> showAllCategories(){
+    public List <Categoria> showAllCategories() {
         return categoryService.findAll();
     }
 
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
     @PostMapping("/categories")
-    public Map <String,Object> createCategory(@RequestBody Map<String,Object> data){
+    public Map <String, Object> createCategory(@RequestBody Map <String, Object> data) {
         String title = (String) data.get("title");
 
-        if(title.contains("/")){
-            data.put("title", title.replace("/",""));
+        if (title.contains("/")) {
+            data.put("title", title.replace("/", ""));
         }
-        data.put("slug",title);
+        data.put("slug", title);
         Categoria categoria = new Categoria();
         categoria.setTitle((String) data.get("title"));
         categoria.setDescription((String) data.get("description"));
@@ -71,8 +74,8 @@ public class CategoriesController {
     }
 
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
-    @PutMapping ("/categories/{title}")
-    public Map <String,Object> updateCategory(@PathVariable String title, @RequestBody Map<String,Object> newData){
+    @PutMapping("/categories/{title}")
+    public Map <String, Object> updateCategory(@PathVariable String title, @RequestBody Map <String, Object> newData) {
         Categoria categoria = categoryService.findByTitle(title);
         categoria.setTitle((String) newData.get("title"));
         categoria.setDescription((String) newData.get("description"));
@@ -84,24 +87,24 @@ public class CategoriesController {
 
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @DeleteMapping("/categories/{title}")
-    public String deleteCategory(@PathVariable String title){
+    public String deleteCategory(@PathVariable String title) {
         categoryService.deleteCategory(title);
         return "ok";
     }
 
-                                   /* TOPICS */
+    /* TOPICS */
 
     @GetMapping("/categories/{title}/topics")
-    public List<Topic> getAllTopics(@PathVariable String title) {
+    public List <Topic> getAllTopics(@PathVariable String title) {
 
         Categoria categoria = categoryService.findByTitle(title);
 
-        return  topicService.getAllByIdCategoria(categoria.getId());
+        return topicService.getAllByIdCategoria(categoria.getId());
     }
 
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
     @PostMapping("/topics")
-    public Map<String,Object> CreateTopic(@RequestBody Map<String,Object> t, @RequestHeader("Authorization") String token)  {
+    public Map <String, Object> CreateTopic(@RequestBody Map <String, Object> t, @RequestHeader("Authorization") String token) {
         String user = jwtTokenUtil.getUsername(token.replace("Bearer ", ""));
         Cuenta cuenta = userService.getUser(user);
 
@@ -114,28 +117,28 @@ public class CategoriesController {
         topic.setCategoria(categoria);
         topicService.CreateTopic(topic);
 
-        Map<String,Object> topicResult = new ObjectMapper().convertValue(t,Map.class);
+        Map <String, Object> topicResult = new ObjectMapper().convertValue(t, Map.class);
         topicResult.put("_id", String.valueOf(topic.getId()));
         return topicResult;
     }
 
     @GetMapping("/topics/{idtopic}")
-    public Map<String,Object> getTopic(@PathVariable String idtopic) throws NumberFormatException{
+    public Map <String, Object> getTopic(@PathVariable String idtopic) throws NumberFormatException {
 
         Topic t = topicService.getTopicById(Integer.parseInt(idtopic));
-        Map<String,Object> topic = new HashMap <>();
-        topic.put("id",t.getId());
-        topic.put("content",t.getContent());
-        topic.put("createdAt",t.getCreatedAt());
-        topic.put("categoria",t.getCategoria());
-        topic.put("cuenta",t.getCuenta());
-        topic.put("title",t.getTitle());
-        topic.put("_id",t.getId());
+        Map <String, Object> topic = new HashMap <>();
+        topic.put("id", t.getId());
+        topic.put("content", t.getContent());
+        topic.put("createdAt", t.getCreatedAt());
+        topic.put("categoria", t.getCategoria());
+        topic.put("cuenta", t.getCuenta());
+        topic.put("title", t.getTitle());
+        topic.put("_id", t.getId());
 
-        List<Reply> Allreplies = List.copyOf(t.getReplies());
-        List<Map<String,Object>> replies = new ArrayList<>();
+        List <Reply> Allreplies = List.copyOf(t.getReplies());
+        List <Map <String, Object>> replies = new ArrayList <>();
         for (Reply r : Allreplies) {
-            Map<String, Object> map = new HashMap<>();
+            Map <String, Object> map = new HashMap <>();
             map.put("id", r.getId());
             map.put("content", r.getContent());
             map.put("createdAt", r.getCreatedAt());
@@ -144,14 +147,14 @@ public class CategoriesController {
             map.put("_id", r.getId());
             replies.add(map);
         }
-        topic.put("replies",replies);
+        topic.put("replies", replies);
 
         return topic;
     }
 
     @PutMapping("/topics/{id}")
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
-    public String updateTopic(@PathVariable String id,@RequestBody Map<String,Object> topicValues){
+    public String updateTopic(@PathVariable String id, @RequestBody Map <String, Object> topicValues) {
 
         Topic topic = topicService.getTopicById(Integer.parseInt(id));
         topic.setTitle((String) topicValues.get("title"));
@@ -163,11 +166,11 @@ public class CategoriesController {
         return "Ok";
     }
 
-                                         /* REPLY */
+    /* REPLY */
 
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
     @PostMapping("/topics/{id}/replies")
-    public Map<String, Object> createReply(@RequestHeader("Authorization") String token, @PathVariable String id, @RequestBody Map data){
+    public Map <String, Object> createReply(@RequestHeader("Authorization") String token, @PathVariable String id, @RequestBody Map data) {
         String user = jwtTokenUtil.getUsername(token.replace("Bearer ", ""));
         Cuenta cuenta = userService.getUser(user);
         String content = (String) data.get("content");
@@ -181,18 +184,19 @@ public class CategoriesController {
         reply.setCreatedAt(Date.from(Instant.now()));
         replyService.CreateReply(reply);
 
-        Map<String,Object> replyContent = new HashMap<>();
-        replyContent.put("id",reply.getId());
-        replyContent.put("content",reply.getContent());
-        replyContent.put("createdAt",reply.getCreatedAt());
-        replyContent.put("cuenta",reply.getCuenta());
-        replyContent.put("_id",reply.getId());
+        Map <String, Object> replyContent = new HashMap <>();
+        replyContent.put("id", reply.getId());
+        replyContent.put("content", reply.getContent());
+        replyContent.put("createdAt", reply.getCreatedAt());
+        replyContent.put("cuenta", reply.getCuenta());
+        replyContent.put("_id", reply.getId());
 
         return replyContent;
     }
+
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @PutMapping("/topics/{idtopic}/replies/{idreply}")
-    public String updateReply(@PathVariable String idreply,@RequestBody Map ReplyUP){
+    public String updateReply(@PathVariable String idreply, @RequestBody Map ReplyUP) {
 
         Reply reply = replyService.getReplyById(Integer.parseInt(idreply));
         reply.setContent((String) ReplyUP.get("content"));
@@ -201,7 +205,7 @@ public class CategoriesController {
 
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @DeleteMapping("/topics/{idtopic}/replies/{idreply}")
-    public String deleteReply(@PathVariable String idreply){
+    public String deleteReply(@PathVariable String idreply) {
 
         Reply reply = replyService.getReplyById(Integer.parseInt(idreply));
         replyService.deleteReply(reply);

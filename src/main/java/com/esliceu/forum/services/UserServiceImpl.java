@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadByUsername(String username)throws UsernameNotFoundException {
+    public UserDetails loadByUsername(String username) throws UsernameNotFoundException {
         Cuenta cuenta = cuentaRepo.findByEmail(username);
         return new User(cuenta.getEmail(), cuenta.getPassword(), new ArrayList <>());
     }
@@ -41,14 +41,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(RegisterRequest request) {
-           Cuenta cuenta = new Cuenta();
-           cuenta.setName(request.getName());
-           cuenta.setEmail(request.getEmail());
-           cuenta.setPassword(MyConfiguration.passwordEncoder().encode(request.getPassword()));
-           cuenta.setRole(request.getRole());
-           cuentaRepo.save(cuenta);
+        Cuenta cuenta = new Cuenta();
+        cuenta.setName(request.getName());
+        cuenta.setEmail(request.getEmail());
+        cuenta.setPassword(MyConfiguration.passwordEncoder().encode(request.getPassword()));
+        cuenta.setRole(request.getRole());
+        cuentaRepo.save(cuenta);
 
-       }
+    }
 
     @Override
     public void updateUser(Cuenta cuenta) {
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         Cuenta cuenta = cuentaRepo.findByEmail(email);
         newPassword = MyConfiguration.passwordEncoder().encode(newPassword);
 
-        if(MyConfiguration.passwordEncoder().matches(currentPassword, cuenta.getPassword())){
+        if (MyConfiguration.passwordEncoder().matches(currentPassword, cuenta.getPassword())) {
             cuenta.setPassword(newPassword);
             cuentaRepo.save(cuenta);
         }

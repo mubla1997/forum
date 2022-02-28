@@ -4,10 +4,7 @@ import com.esliceu.forum.models.Cuenta;
 import com.esliceu.forum.services.UserServiceImpl;
 import com.esliceu.forum.utils.JwtTokenUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +22,7 @@ public class ProfileController {
 
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @GetMapping("/getprofile")
-    public Map<String,Object> getProfileData(@RequestHeader("Authorization") String token){
+    public Map <String, Object> getProfileData(@RequestHeader("Authorization") String token) {
         token = token.replace("Bearer ", "");
 
         String user = jwtTokenUtil.getUsername(token);
@@ -33,8 +30,10 @@ public class ProfileController {
 
         return cuenta.ObtainJson();
     }
+
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
-    public Map<String, Object> updateUserProfile(@RequestHeader("Authorization") String token,@RequestBody Map<String, Object> data) throws JsonProcessingException {
+    public Map <String, Object> updateUserProfile(@RequestHeader("Authorization") String token,
+                                                  @RequestBody Map <String, Object> data) throws JsonProcessingException {
 
         token = token.replace("Bearer ", "");
         String user = jwtTokenUtil.getUsername(token);
@@ -48,15 +47,16 @@ public class ProfileController {
 
         service.updateUser(cuenta);
 
-        Map<String, Object> result = new HashMap <>();
+        Map <String, Object> result = new HashMap <>();
         result.put("user", cuenta.ObtainJson());
         result.put("token", token);
 
         return result;
     }
+
     @PreAuthorize("hasAnyRole('Moderator','Admin')")
     @PutMapping("/profile/password")
-    public Map<String, Object> updateUserPassword(@RequestHeader("Authorization") String token, @RequestBody Map<String, Object> passwordData) throws JsonProcessingException {
+    public Map <String, Object> updateUserPassword(@RequestHeader("Authorization") String token, @RequestBody Map <String, Object> passwordData) throws JsonProcessingException {
         token = token.replace("Bearer ", "");
 
         String user = jwtTokenUtil.getUsername(token);
@@ -64,7 +64,7 @@ public class ProfileController {
         String actualPassword = (String) passwordData.get("currentPassword");
         String newPassword = (String) passwordData.get("newPassword");
 
-        service.updatePassword(user,actualPassword,newPassword);
+        service.updatePassword(user, actualPassword, newPassword);
 
         Cuenta cuenta = service.getUser(user);
 

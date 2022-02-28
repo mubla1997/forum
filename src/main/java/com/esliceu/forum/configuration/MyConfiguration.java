@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
-public class MyConfiguration extends WebSecurityConfigurerAdapter{
+public class MyConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     UserServiceImpl service;
 
@@ -35,18 +35,19 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
     @Value("${url}")
     String url;
 
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         try {
             auth.userDetailsService(username -> service.loadByUsername(username));
-        }catch (UsernameNotFoundException usernameNotFoundException){
+        } catch (UsernameNotFoundException usernameNotFoundException) {
             System.out.println("Username not found, try again...");
         }
-    }
-
-    @Bean
-    public static PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -71,13 +72,13 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
                 .and();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/").permitAll()
-                .antMatchers(HttpMethod.GET,"/error").permitAll()
-                .antMatchers(HttpMethod.POST,"/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/register").permitAll()
-                .antMatchers(HttpMethod.GET,"/getprofile").permitAll()
-                .antMatchers(HttpMethod.GET,"/categories/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/topics/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/error").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/register").permitAll()
+                .antMatchers(HttpMethod.GET, "/getprofile").permitAll()
+                .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/topics/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(
@@ -85,6 +86,7 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
                 UsernamePasswordAuthenticationFilter.class
         );
     }
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source =
@@ -98,7 +100,8 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter{
         return new CorsFilter(source);
     }
 
-    @Override @Bean
+    @Override
+    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
