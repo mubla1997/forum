@@ -91,9 +91,17 @@ public class CategoriesController {
 
                                    /* TOPICS */
 
+    @GetMapping("/categories/{title}/topics")
+    public List<Topic> getAllTopics(@PathVariable String title) {
+
+        Categoria categoria = categoryService.findByTitle(title);
+
+        return topicService.getAllByIdCategoria(categoria.getId());
+    }
+
     @PreAuthorize("hasAnyRole('User','Moderator','Admin')")
     @PostMapping("/topics")
-    public Map<String,Object> CreateTopic(@RequestBody Map<String,Object> t, @RequestHeader("Authorization") String token) throws JsonProcessingException {
+    public Map<String,Object> CreateTopic(@RequestBody Map<String,Object> t, @RequestHeader("Authorization") String token)  {
         String user = jwtTokenUtil.getUsername(token.replace("Bearer ", ""));
         Cuenta cuenta = userService.getUser(user);
         Categoria categoria = categoryService.findByTitle((String) t.get("title"));
@@ -109,14 +117,6 @@ public class CategoriesController {
         Map<String,Object> topicResult = new ObjectMapper().convertValue(t,Map.class);
         topicResult.put("_id", String.valueOf(topic.getId()));
         return topicResult;
-    }
-
-    @GetMapping("/categories/{title}/topics")
-    public List<Topic> getAllTopics(@PathVariable String title) {
-
-        Categoria categoria = categoryService.findByTitle(title);
-
-        return topicService.getAllByIdCategoria(categoria.getId());
     }
 
     @GetMapping("/topics/{idtopic}")

@@ -5,7 +5,7 @@ import net.minidev.json.annotate.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
-@Table(name = "Categoria")
+@Table(name = "categoria")
 @Entity
 public class Categoria {
     @Id
